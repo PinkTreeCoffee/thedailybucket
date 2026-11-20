@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Daily Bucket | Carving my way to scratch, one bucket a day</title>
+  <meta name="description" content="Range sessions and backyard net practice, about five days a week. Every club from wedge to driver, with the launch monitor numbers.">
+  <meta name="theme-color" content="#0F833C">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="The Daily Bucket">
+  <meta property="og:description" content="Carving my way to scratch, one bucket a day.">
+  <meta property="og:image" content="/images/og.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <style>
+    :root {
+      --green: #0F833C;
+      --green-dark: #0A5E2B;
+      --yellow: #FDDD00;
+      --white: #FFFFFF;
+      --ink: #0B1F12;
+      --mist: #F2F8F3;
+      --radius: 18px;
+      --font: ui-rounded, "SF Pro Rounded", "Nunito", "Segoe UI", system-ui, -apple-system, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; font-family: var(--font); color: var(--ink); background: var(--mist); line-height: 1.55; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; }
+    img { max-width: 100%; height: auto; display: block; }
+    .wrap { width: min(1120px, 100% - 40px); margin: 0 auto; }
+    section { padding: 88px 0; }
+    h1, h2, h3 { line-height: 1.1; margin: 0; font-weight: 800; letter-spacing: -0.01em; }
+    h2 { font-size: clamp(30px, 4vw, 44px); }
+    .eyebrow { margin: 0 0 10px; font-weight: 800; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--green); }
+    .btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 24px; border-radius: 999px; font-weight: 800; text-decoration: none; transition: transform 0.15s, background 0.15s; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-yellow { background: var(--yellow); color: var(--ink); }
+    .btn-outline { border: 2px solid var(--white); color: var(--white); }
+    .btn-outline:hover { background: rgba(255, 255, 255, 0.12); }
+    .btn-green { background: var(--green); color: var(--white); }
+    .btn-green:hover { background: var(--green-dark); }
+
+    /* Header */
+    header { position: sticky; top: 0; z-index: 10; background: var(--green); border-bottom: 1px solid rgba(255, 255, 255, 0.12); }
+    header .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .brand { display: flex; align-items: center; gap: 10px; color: var(--white); text-decoration: none; font-weight: 800; font-size: 18px; }
+    .brand img { width: 38px; height: 38px; border-radius: 10px; }
+    .brand span b { color: var(--yellow); }
+    nav { display: flex; gap: 24px; }
+    nav a { color: var(--white); text-decoration: none; font-weight: 700; opacity: 0.9; }
+    nav a:hover { opacity: 1; color: var(--yellow); }
+    @media (max-width: 560px) { nav { gap: 16px; font-size: 15px; } .brand span { display: none; } }
+
+    /* Hero */
+    .hero { background: var(--green); color: var(--white); padding: 64px 0 96px; position: relative; overflow: hidden; }
+    .hero::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 56px; background: var(--mist); clip-path: ellipse(70% 100% at 50% 100%); }
+    .hero .wrap { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 48px; align-items: center; }
+    .hero-logo { width: min(480px, 100%); }
+    .hero p.tag { font-size: clamp(20px, 2.4vw, 26px); font-weight: 700; margin: 26px 0 30px; max-width: 30ch; }
+    .hero p.tag em { font-style: normal; color: var(--yellow); }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .hero-card { justify-self: center; width: min(320px, 100%); aspect-ratio: 9 / 16; border-radius: 26px; overflow: hidden; background: var(--green-dark); box-shadow: 0 24px 60px rgba(0, 0, 0, 0.3); border: 4px solid rgba(255, 255, 255, 0.9); }
+    .hero-card iframe { width: 100%; height: 100%; border: 0; display: block; }
+    @media (max-width: 820px) {
+      .hero .wrap { grid-template-columns: 1fr; text-align: center; }
+      .hero-logo { margin: 0 auto; }
+      .hero p.tag { margin-left: auto; margin-right: auto; }
+      .hero-actions { justify-content: center; }
+      .hero-card { display: none; }
+    }
+
+    /* Videos */
+    .videos-head { display: flex; justify-content: space-between; align-items: end; gap: 20px; flex-wrap: wrap; margin-bottom: 26px; }
+    .carousel-nav { display: flex; gap: 10px; }
+    .carousel-nav button { width: 46px; height: 46px; border-radius: 50%; border: 2px solid var(--green); background: transparent; color: var(--green); font-size: 20px; cursor: pointer; }
+    .carousel-nav button:hover { background: var(--green); color: var(--white); }
+    .carousel { display: grid; grid-auto-flow: column; grid-auto-columns: 240px; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; padding: 6px 6px 24px; margin: 0 -6px; scroll-padding: 0 6px; scrollbar-width: thin; }
+    .video-card, .video-frame { position: relative; aspect-ratio: 9 / 16; border-radius: var(--radius); overflow: hidden; background: var(--green); box-shadow: 0 10px 30px rgba(11, 31, 18, 0.15); scroll-snap-align: start; }
+    .video-card { border: 0; padding: 0; cursor: pointer; width: 100%; text-align: left; font-family: inherit; }
+    .video-card img { width: 100%; height: 100% !important; object-fit: cover; transition: transform 0.3s; }
+    .video-card:hover img { transform: scale(1.04); }
+    .video-card .play { position: absolute; top: 50%; left: 50%; width: 58px; height: 58px; margin: -29px 0 0 -29px; border-radius: 50%; background: var(--yellow); display: grid; place-items: center; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25); }
+    .video-card .play::after { content: ""; margin-left: 5px; border-style: solid; border-width: 11px 0 11px 18px; border-color: transparent transparent transparent var(--ink); }
+    .video-card .title { position: absolute; left: 0; right: 0; bottom: 0; padding: 44px 14px 14px; color: var(--white); font-weight: 700; font-size: 15px; line-height: 1.3; background: linear-gradient(transparent, rgba(5, 25, 12, 0.88)); }
+    .video-frame iframe { width: 100%; height: 100%; border: 0; display: block; }
+    .carousel > .video-frame:only-child { width: 240px; }
+    .videos-more { margin-top: 22px; }
+    @media (max-width: 700px) { .carousel { grid-auto-columns: 70%; } .carousel-nav { display: none; } }
+
+    /* About */
+    .about { background: var(--white); }
+    .about .wrap { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 56px; align-items: start; }
+    .about p { font-size: 18px; margin: 18px 0 0; }
+    .steps { list-style: none; padding: 0; margin: 28px 0 0; display: grid; gap: 14px; }
+    .steps li { display: grid; grid-template-columns: 44px 1fr; gap: 14px; align-items: start; }
+    .steps li b.n { width: 44px; height: 44px; border-radius: 50%; background: var(--yellow); display: grid; place-items: center; font-size: 18px; }
+    .steps li span { padding-top: 9px; }
+    .bag { background: var(--green); color: var(--white); border-radius: var(--radius); padding: 30px; }
+    .bag h3 { font-size: 24px; display: flex; align-items: center; gap: 12px; }
+    .bag h3 img { width: 44px; height: 44px; border-radius: 10px; }
+    .bag ul { list-style: none; padding: 0; margin: 20px 0 0; }
+    .bag li { display: flex; justify-content: space-between; gap: 16px; padding: 11px 0; border-top: 1px solid rgba(255, 255, 255, 0.18); font-weight: 600; }
+    .bag li span:last-child { color: var(--yellow); text-align: right; }
+    @media (max-width: 820px) { .about .wrap { grid-template-columns: 1fr; } }
+
+    /* Follow */
+    .follow { text-align: center; }
+    .follow p { font-size: 18px; margin: 14px auto 30px; max-width: 46ch; }
+    .socials { display: flex; justify-content: center; flex-wrap: wrap; gap: 14px; }
+    .socials a { display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px; border-radius: 999px; background: var(--white); border: 2px solid var(--green); color: var(--green); font-weight: 800; text-decoration: none; transition: background 0.15s, color 0.15s; }
+    .socials a:hover { background: var(--green); color: var(--white); }
+    .socials svg { width: 20px; height: 20px; fill: currentColor; }
+
+    footer { background: var(--green-dark); color: rgba(255, 255, 255, 0.85); padding: 30px 0; font-size: 15px; }
+    footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    footer a { color: var(--yellow); text-decoration: none; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <a class="brand" href="#top"><img src="/images/bucket.png" alt=""><span>The <b>Daily</b> Bucket</span></a>
+      <nav>
+        <a href="#videos">Videos</a>
+        <a href="#about">About</a>
+        <a href="#follow">Follow</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero" id="top">
+    <div class="wrap">
+      <div>
+        <h1><img class="hero-logo" src="/images/logo.png" width="980" height="565" alt="The Daily Bucket"></h1>
+        <p class="tag">Carving my way to scratch, <em>one bucket a day.</em></p>
+        <div class="hero-actions">
+          <a class="btn btn-yellow" href="#videos">Watch the latest</a>
+          <a class="btn btn-outline" href="https://www.youtube.com/@Thedailybucketgolf?sub_confirmation=1" target="_blank" rel="noopener">Subscribe on YouTube</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <iframe src="https://www.youtube-nocookie.com/embed/videoseries?list=UUsbA9yxnpoWz8hBcoe9dsBQ" title="The Daily Bucket on YouTube" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+    </div>
+  </section>
+
+  <section id="videos">
+    <div class="wrap">
+      <div class="videos-head">
+        <div>
+          <p class="eyebrow">Videos</p>
+          <h2>Latest from the range</h2>
+        </div>
+        <div class="carousel-nav" hidden>
+          <button type="button" data-dir="-1" aria-label="Previous videos">&larr;</button>
+          <button type="button" data-dir="1" aria-label="Next videos">&rarr;</button>
+        </div>
+      </div>
+      <div class="carousel" id="carousel">
+        <div class="video-frame">
+          <iframe src="https://www.youtube-nocookie.com/embed/videoseries?list=UUsbA9yxnpoWz8hBcoe9dsBQ" title="The Daily Bucket videos on YouTube" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+      </div>
+      <p class="videos-more"><a class="btn btn-green" href="https://www.youtube.com/@Thedailybucketgolf/shorts" target="_blank" rel="noopener">See all on YouTube</a></p>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">About</p>
+        <h2>One bucket at a time</h2>
+        <p>Range sessions and backyard net practice, about five days a week. A launch monitor sits behind the ball on every swing, so every video comes with the real numbers: carry, ball speed, launch and club speed.</p>
+        <ul class="steps">
+          <li><b class="n">1</b><span>Hit a bucket and work through the bag, wedges up to driver.</span></li>
+          <li><b class="n">2</b><span>Pull the best swing with each club and put the numbers on screen.</span></li>
+          <li><b class="n">3</b><span>Post it, then go hit another bucket. Repeat until scratch.</span></li>
+        </ul>
+      </div>
+      <aside class="bag">
+        <h3><img src="/images/bucket.png" alt="">In the bag</h3>
+        <ul>
+          <li><span>Driver</span><span>Callaway Great Big Bertha</span></li>
+          <li><span>Fairway woods</span><span>3 wood, 5 wood</span></li>
+          <li><span>Hybrid</span><span>7 hybrid</span></li>
+          <li><span>Irons</span><span>4 to 9</span></li>
+          <li><span>Wedges</span><span>Mizuno PW, Mizuno 56&deg; SW</span></li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <section class="follow" id="follow">
+    <div class="wrap">
+      <p class="eyebrow">Follow along</p>
+      <h2>New videos every day</h2>
+      <p>Catch every session as it drops on your favorite app.</p>
+      <div class="socials">
+        <a href="https://www.youtube.com/@Thedailybucketgolf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.3 3.6-6.3 3.6Z"/></svg>YouTube</a>
+        <a href="https://www.tiktok.com/@thedailybucketgolf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.6 6.7a4.8 4.8 0 0 1-3.8-4.2V2h-3.4v13.4a2.9 2.9 0 1 1-2-2.7V9.2a6.3 6.3 0 1 0 5.4 6.2V8.6a8.1 8.1 0 0 0 4.7 1.5V6.8l-.9-.1Z"/></svg>TikTok</a>
+        <a href="https://www.instagram.com/thedailybucketgolf/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 3.3.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-3.3-.1-4.8-1.7-4.9-4.9C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8C2.4 3.9 3.9 2.4 7.2 2.3c1.2-.1 1.6-.1 4.8-.1ZM12 0C8.7 0 8.3 0 7.1.1 2.7.3.3 2.7.1 7.1 0 8.3 0 8.7 0 12s0 3.7.1 4.9c.2 4.4 2.6 6.8 7 7 1.2.1 1.6.1 4.9.1s3.7 0 4.9-.1c4.4-.2 6.8-2.6 7-7 .1-1.2.1-1.6.1-4.9s0-3.7-.1-4.9c-.2-4.4-2.6-6.8-7-7C15.7 0 15.3 0 12 0Zm0 5.8a6.2 6.2 0 1 0 0 12.4 6.2 6.2 0 0 0 0-12.4ZM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm6.4-11.8a1.4 1.4 0 1 0 0 2.9 1.4 1.4 0 0 0 0-2.9Z"/></svg>Instagram</a>
+        <a href="https://x.com/JohnKErickson" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.2 2.3h3.4l-7.4 8.4 8.7 11.5h-6.8l-5.3-7-6.1 7H1.3l7.9-9L.9 2.3h7l4.8 6.4 5.5-6.4Zm-1.2 17.9h1.9L7.1 4.2H5.1l11.9 16Z"/></svg>X</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <span>&copy; <span id="year">2026</span> The Daily Bucket</span>
+      <span>More from me at <a href="https://johnerickson.life" target="_blank" rel="noopener">johnerickson.life</a></span>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    // Video carousel: loads the latest uploads from /api/shorts (a Netlify function).
+    // If that fails, the single YouTube playlist player stays in place.
+    (function () {
+      var carousel = document.getElementById('carousel');
+      var nav = document.querySelector('.carousel-nav');
+      var loaded = false;
+      function play(card, id, title) {
+        var frame = document.createElement('div');
+        frame.className = 'video-frame';
+        var iframe = document.createElement('iframe');
+        iframe.src = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&playsinline=1&rel=0';
+        iframe.title = title;
+        iframe.allow = 'autoplay; accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share';
+        iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+        iframe.allowFullscreen = true;
+        frame.appendChild(iframe);
+        card.replaceWith(frame);
+      }
+      function build(videos) {
+        carousel.innerHTML = '';
+        videos.forEach(function (v) {
+          var card = document.createElement('button');
+          card.type = 'button';
+          card.className = 'video-card';
+          card.setAttribute('aria-label', 'Play: ' + v.title);
+          var img = document.createElement('img');
+          img.src = 'https://i.ytimg.com/vi/' + v.id + '/hqdefault.jpg';
+          img.alt = '';
+          img.loading = 'lazy';
+          var icon = document.createElement('span');
+          icon.className = 'play';
+          var title = document.createElement('span');
+          title.className = 'title';
+          title.textContent = v.title;
+          card.append(img, icon, title);
+          card.addEventListener('click', function () { play(card, v.id, v.title); });
+          carousel.appendChild(card);
+        });
+        if (videos.length > 1) nav.hidden = false;
+      }
+      function load() {
+        if (loaded) return;
+        loaded = true;
+        fetch('/api/shorts')
+          .then(function (r) { return r.ok ? r.json() : null; })
+          .then(function (data) { if (data && data.videos && data.videos.length) build(data.videos.slice(0, 15)); })
+          .catch(function () {});
+      }
+      nav.addEventListener('click', function (e) {
+        var btn = e.target.closest('button');
+        if (btn) carousel.scrollBy({ left: Number(btn.dataset.dir) * carousel.clientWidth * 0.8, behavior: 'smooth' });
+      });
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (entries, obs) {
+          if (entries[0].isIntersecting) { load(); obs.disconnect(); }
+        }, { rootMargin: '400px' }).observe(carousel);
+      } else { load(); }
+    })();
+  </script>
+</body>
+</html>
